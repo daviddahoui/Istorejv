@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10" xmlns="http://javafx.com/javafx"
+<VBox alignment="CENTER" spacing="15" xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.javastore.istorejv.controller.LoginController">
+      fx:controller="com.javastore.istorejv.controller.LoginController"
+      style="-fx-padding: 20; -fx-background-color: #f0f0f0;">
 
-    <TextField fx:id="emailField" promptText="Email"/>
-    <PasswordField fx:id="passwordField" promptText="Mot de passe"/>
-    <Button text="Se connecter" onAction="#onLoginClick"/>
-    <Label fx:id="messageLabel"/>
+    <!-- Titre de la fenêtre de connexion -->
+    <Label text="Connexion" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <!-- Champ pour l'adresse e-mail -->
+    <TextField fx:id="emailField" promptText="Email" maxWidth="300"/>
+
+    <!-- Champ pour le mot de passe -->
+    <PasswordField fx:id="passwordField" promptText="Mot de passe" maxWidth="300"/>
+
+    <!-- Bouton de connexion -->
+    <Button text="Se connecter" onAction="#onLoginClick" maxWidth="300"/>
+
+    <!-- Label d'affichage des messages -->
+    <Label fx:id="messageLabel" maxWidth="300" style="-fx-text-fill: red;"/>
+
 </VBox>
