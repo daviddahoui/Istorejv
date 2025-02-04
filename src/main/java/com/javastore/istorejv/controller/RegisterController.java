@@ -11,9 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
-public class LoginController {
+public class RegisterController {
 
-    private static final Logger LOGGER = Logger.getLogger(LoginController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RegisterController.class.getName());
 
     // Expression régulière simple pour valider le format d'un email
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w-.]+@[\\w-]+\\.[a-z]{2,}$", Pattern.CASE_INSENSITIVE);
@@ -25,43 +25,51 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
+    private PasswordField confirmPasswordField;
+
+    @FXML
     private Label messageLabel;
 
-    /**
-     * Méthode appelée lors du clic sur le bouton de connexion.
-     */
     @FXML
-    protected void onLoginClick() {
+    protected void onRegisterClick() {
         String email = emailField.getText().trim();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
 
         // Vérification des champs vides
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             showMessage("Veuillez remplir tous les champs.", AlertType.WARNING);
             return;
         }
 
-        // Validation du format de l'e-mail
+        // Validation du format de l'email
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             showMessage("Veuillez entrer une adresse e-mail valide.", AlertType.WARNING);
             return;
         }
 
+        // Vérification que les mots de passe correspondent
+        if (!password.equals(confirmPassword)) {
+            showMessage("Les mots de passe ne correspondent pas !", AlertType.WARNING);
+            return;
+        }
+
+        // Tentative d'inscription de l'utilisateur
         try {
-            // Tentative d'authentification de l'utilisateur
-            if (AuthService.loginUser(email, password)) {
-                showMessage("Connexion réussie !", AlertType.INFORMATION);
+            boolean isRegistered = AuthService.registerUser(email, password);
+            if (isRegistered) {
+                showMessage("Inscription réussie !", AlertType.INFORMATION);
             } else {
-                showMessage("Échec de la connexion !", AlertType.ERROR);
+                showMessage("Échec de l'inscription !", AlertType.ERROR);
             }
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Erreur lors de la tentative de connexion : ", e);
-            showMessage("Une erreur est survenue lors de la connexion.", AlertType.ERROR);
+            LOGGER.log(Level.SEVERE, "Erreur lors de l'inscription : ", e);
+            showMessage("Une erreur est survenue lors de l'inscription.", AlertType.ERROR);
         }
     }
 
     /**
-     * Affiche un message à l'utilisateur dans le label et via une alerte JavaFX.
+     * Affiche un message à l'utilisateur via le label et une boîte de dialogue.
      *
      * @param message Le message à afficher
      * @param type Le type d'alerte (Information, Warning, Error)
@@ -69,7 +77,7 @@ public class LoginController {
     private void showMessage(String message, AlertType type) {
         messageLabel.setText(message);
         Alert alert = new Alert(type);
-        alert.setTitle("Connexion");
+        alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
