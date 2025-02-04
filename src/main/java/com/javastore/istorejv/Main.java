@@ -15,8 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // Chargement du fichier FXML pour la vue de connexion
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/istore/views/login.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/javastore/istorejv/login.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
             primaryStage.setScene(scene);
             primaryStage.setTitle("iStore - Connexion");
