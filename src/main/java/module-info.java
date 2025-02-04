@@ -5,6 +5,7 @@ module com.javastore.istorejv {
     requires org.controlsfx.controls;
     requires java.sql;
     requires jbcrypt;
+    requires static lombok;
 
     opens com.javastore.istorejv to javafx.fxml;
     exports com.javastore.istorejv;
