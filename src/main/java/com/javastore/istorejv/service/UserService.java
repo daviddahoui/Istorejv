@@ -1,6 +1,7 @@
 package com.javastore.istorejv.service;
 
 import com.javastore.istorejv.dao.UserDAO;
+import com.javastore.istorejv.model.Role;
 import com.javastore.istorejv.model.User;
 import com.javastore.istorejv.util.PasswordUtils;
 
@@ -68,5 +69,35 @@ public class UserService {
         User newUser = new User(0, email, pseudo, hashedPassword, com.javastore.istorejv.model.Role.USER);
         boolean success = UserDAO.createUser(newUser);
         return success ? "OK" : "Erreur lors de la création du compte.";
+    }
+
+    /**
+     * Met à jour un utilisateur. Seul l'utilisateur lui-même peut se modifier sauf s'il est administrateur.
+     *
+     * @param currentUser L'utilisateur actuellement connecté.
+     * @param userToUpdate L'utilisateur avec les informations mises à jour.
+     * @return "OK" en cas de succès ou un message d'erreur.
+     */
+    public static String updateUser(User currentUser, User userToUpdate) {
+        if (currentUser.getId() != userToUpdate.getId() && currentUser.getRole() != Role.ADMIN) {
+            return "Vous ne pouvez mettre à jour que votre propre compte.";
+        }
+        boolean success = UserDAO.updateUser(userToUpdate);
+        return success ? "OK" : "Erreur lors de la mise à jour du compte.";
+    }
+
+    /**
+     * Supprime un utilisateur. Seul l'utilisateur lui-même peut se supprimer sauf s'il est administrateur.
+     *
+     * @param currentUser L'utilisateur actuellement connecté.
+     * @param userIdToDelete L'identifiant du compte à supprimer.
+     * @return "OK" en cas de succès ou un message d'erreur.
+     */
+    public static String deleteUser(User currentUser, int userIdToDelete) {
+        if (currentUser.getId() != userIdToDelete && currentUser.getRole() != Role.ADMIN) {
+            return "Vous ne pouvez supprimer que votre propre compte.";
+        }
+        boolean success = UserDAO.deleteUserById(userIdToDelete);
+        return success ? "OK" : "Erreur lors de la suppression du compte.";
     }
 }

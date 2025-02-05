@@ -39,6 +39,46 @@ public class StoreDAO {
         return false;
     }
 
+    public static boolean addEmployeeToStore(int storeId, int userId) {
+        String sql = "INSERT INTO store_employees (store_id, user_id) VALUES (?, ?)";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, storeId);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static List<com.javastore.istorejv.model.User> getEmployeesForStore(int storeId) {
+        List<com.javastore.istorejv.model.User> employees = new ArrayList<>();
+        String sql = "SELECT u.id, u.email, u.pseudo, u.password, u.role " +
+                "FROM users u JOIN store_employees se ON u.id = se.user_id " +
+                "WHERE se.store_id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, storeId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int id = rs.getInt("id");
+                    String email = rs.getString("email");
+                    String pseudo = rs.getString("pseudo");
+                    String passwordHash = rs.getString("password");
+                    String roleStr = rs.getString("role");
+                    com.javastore.istorejv.model.User user = new com.javastore.istorejv.model.User(
+                            id, email, pseudo, passwordHash, com.javastore.istorejv.model.Role.valueOf(roleStr.toUpperCase())
+                    );
+                    employees.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employees;
+    }
+
     /**
      * Récupère la liste de tous les magasins.
      */

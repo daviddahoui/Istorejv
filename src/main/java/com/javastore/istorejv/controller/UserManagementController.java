@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import java.util.List;
+import java.util.Objects;
 
 public class UserManagementController {
 
@@ -89,7 +90,7 @@ public class UserManagementController {
     @FXML
     private void handleBackAction(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/DashboardView.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/DashboardView.fxml")));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
         } catch(Exception e) {

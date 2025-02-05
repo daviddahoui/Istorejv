@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/InventoryDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/StoreDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/UserDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/WhitelistDAO.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/service/StoreService.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/test/java/com/istorejv/dao/ArticleDAOTest.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/test/java/com/istorejv/dao/StoreDAOTest.java" dialect="GenericSQL" />
