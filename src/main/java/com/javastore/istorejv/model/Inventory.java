@@ -1,39 +1,25 @@
 package com.javastore.istorejv.model;
 
-import com.javastore.istorejv.item.InventoryItem;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 public class Inventory {
-    private Store store;
-    private List<InventoryItem> items = new ArrayList<>();
+    private List<Article> articles;
 
-    public Inventory(Store store) {
-        this.store = store;
+    public Inventory() {
+        this.articles = new ArrayList<>();
     }
 
-    public void addItem(InventoryItem item) {
-        items.add(item);
+    public void addArticle(Article article) {
+        articles.add(article);
     }
 
-    public boolean removeItem(int itemId) {
-        return items.removeIf(item -> item.getId() == itemId);
-    }
-
-    public InventoryItem getItemById(int id) {
-        return items.stream()
-                .filter(item -> item.getId() == id)
-                .findFirst()
-                .orElse(null);
-    }
-
-    @Override
-    public String toString() {
-        return "Inventory for Store: " + store.getName() + ", Items: " + items.size();
+    public void removeArticle(Article article) {
+        articles.remove(article);
     }
 }

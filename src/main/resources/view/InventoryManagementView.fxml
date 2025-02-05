@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.javastore.istorejv.controller.InventoryManagementController">
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <TextField fx:id="articleNameField" promptText="Nom de l'article" />
+            <TextField fx:id="articlePriceField" promptText="Prix" />
+            <TextField fx:id="articleStockField" promptText="Quantité en stock" />
+            <Button text="Ajouter article" onAction="#handleAddArticleAction" />
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <ListView fx:id="articleListView" prefHeight="200" prefWidth="400" />
+            <HBox spacing="10">
+                <Button text="Supprimer article sélectionné" onAction="#handleDeleteArticleAction" />
+                <Button text="Mettre à jour article sélectionné" onAction="#handleUpdateArticleAction" />
+            </HBox>
+        </VBox>
+    </center>
+    <bottom>
+        <VBox alignment="center">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <Button text="Retour Dashboard" onAction="#handleBackToDashboardAction"/>
+        </VBox>
+    </bottom>
+</BorderPane>
