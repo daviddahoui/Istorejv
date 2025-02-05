@@ -20,16 +20,20 @@ public class ArticleDAO {
     /**
      * Crée un nouvel article dans un inventaire donné.
      *
-     * @param article     L'article à créer.
+     * @param article     L'article à créer. Doit être non null et avoir un nom défini.
      * @param inventoryId L'identifiant de l'inventaire auquel ajouter l'article.
      * @return true si l'insertion a réussi, false sinon.
      */
     public static boolean createArticle(Article article, int inventoryId) {
+        if (article == null || article.getName() == null || article.getName().trim().isEmpty()) {
+            LOGGER.warning("L'article est null ou son nom est vide.");
+            return false;
+        }
         String sql = "INSERT INTO articles(name, price, stockQuantity, inventory_id) VALUES(?, ?, ?, ?)";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, article.getName());
+            stmt.setString(1, article.getName().trim());
             stmt.setDouble(2, article.getPrice());
             stmt.setInt(3, article.getStockQuantity());
             stmt.setInt(4, inventoryId);
@@ -40,12 +44,14 @@ public class ArticleDAO {
                     if (rs.next()) {
                         int generatedId = rs.getInt(1);
                         article.setId(generatedId);
+                    } else {
+                        LOGGER.warning("Aucune clé générée lors de la création de l'article.");
                     }
                 }
                 return true;
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error creating article", e);
+            LOGGER.log(Level.SEVERE, "Erreur lors de la création de l'article dans l'inventaire " + inventoryId, e);
         }
         return false;
     }
@@ -74,7 +80,7 @@ public class ArticleDAO {
                 }
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error retrieving articles by inventory id", e);
+            LOGGER.log(Level.SEVERE, "Erreur lors de la récupération des articles pour l'inventaire " + inventoryId, e);
         }
         return articles;
     }
@@ -100,7 +106,7 @@ public class ArticleDAO {
                 articles.add(article);
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error retrieving all articles", e);
+            LOGGER.log(Level.SEVERE, "Erreur lors de la récupération de tous les articles.", e);
         }
         return articles;
     }
@@ -126,7 +132,7 @@ public class ArticleDAO {
                 }
             }
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error retrieving article by id", e);
+            LOGGER.log(Level.SEVERE, "Erreur lors de la récupération de l'article avec l'id: " + id, e);
         }
         return null;
     }
@@ -138,17 +144,21 @@ public class ArticleDAO {
      * @return true si la mise à jour a réussi, false sinon.
      */
     public static boolean updateArticle(Article article) {
+        if (article == null || article.getId() <= 0) {
+            LOGGER.warning("L'article est null ou l'identifiant est invalide.");
+            return false;
+        }
         String sql = "UPDATE articles SET name = ?, price = ?, stockQuantity = ? WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, article.getName());
+            stmt.setString(1, article.getName().trim());
             stmt.setDouble(2, article.getPrice());
             stmt.setInt(3, article.getStockQuantity());
             stmt.setInt(4, article.getId());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error updating article", e);
+            LOGGER.log(Level.SEVERE, "Erreur lors de la mise à jour de l'article avec l'id: " + article.getId(), e);
         }
         return false;
     }
@@ -167,7 +177,7 @@ public class ArticleDAO {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Error deleting article", e);
+            LOGGER.log(Level.SEVERE, "Erreur lors de la suppression de l'article avec l'id: " + id, e);
         }
         return false;
     }

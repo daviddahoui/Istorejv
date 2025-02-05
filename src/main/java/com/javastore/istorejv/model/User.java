@@ -3,6 +3,7 @@ package com.javastore.istorejv.model;
 import lombok.Getter;
 
 @Getter
+
 public class User {
     private final int id;
     private final String email;

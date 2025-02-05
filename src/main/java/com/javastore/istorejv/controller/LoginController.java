@@ -30,8 +30,18 @@ public class LoginController {
      */
     @FXML
     private void handleLoginAction(ActionEvent event) {
-        String email = emailField.getText();
+        String email = emailField.getText().trim();
         String password = passwordField.getText();
+
+        // Vérifier que les champs ne sont pas vides
+        if (email.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez remplir tous les champs.");
+            alert.showAndWait();
+            return;
+        }
 
         User user = UserService.login(email, password);
         if (user != null) {
@@ -71,4 +81,3 @@ public class LoginController {
         }
     }
 }
-

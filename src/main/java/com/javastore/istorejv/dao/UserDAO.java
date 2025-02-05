@@ -3,14 +3,19 @@ package com.javastore.istorejv.dao;
 import com.javastore.istorejv.model.User;
 import com.javastore.istorejv.model.Role;
 import com.javastore.istorejv.util.DBConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserDAO {
+
+    private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
 
     /**
      * Recherche un utilisateur par email.
@@ -19,6 +24,10 @@ public class UserDAO {
      * @return un objet User s'il est trouvé, sinon null
      */
     public static User findByEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            LOGGER.warning("Email fourni est null ou vide.");
+            return null;
+        }
         User user = null;
         String sql = "SELECT * FROM users WHERE email = ?";
         try (Connection conn = DBConnection.getConnection();
@@ -31,13 +40,33 @@ public class UserDAO {
                     String pseudo = rs.getString("pseudo");
                     String passwordHash = rs.getString("password");
                     String roleStr = rs.getString("role");
+                    // Supposons que roleStr soit toujours non-null et correspond aux valeurs de l'énumération
                     user = new User(id, emailDb, pseudo, passwordHash, Role.valueOf(roleStr.toUpperCase()));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Erreur lors de la recherche de l'utilisateur par email: " + email, e);
+        }
+        return user;
+    }
+    public static User findById(int id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    String pseudo = rs.getString("pseudo");
+                    String passwordHash = rs.getString("password");
+                    String roleStr = rs.getString("role");
+                    return new User(id, email, pseudo, passwordHash, Role.valueOf(roleStr.toUpperCase()));
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     /**
@@ -61,7 +90,7 @@ public class UserDAO {
                 users.add(user);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erreur lors de la récupération de tous les utilisateurs.", e);
         }
         return users;
     }
@@ -82,7 +111,7 @@ public class UserDAO {
             stmt.setString(4, user.getRole().toString());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erreur lors de la création de l'utilisateur: " + user.getEmail(), e);
         }
         return false;
     }
@@ -104,7 +133,7 @@ public class UserDAO {
             stmt.setInt(5, user.getId());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erreur lors de la mise à jour de l'utilisateur avec l'id: " + user.getId(), e);
         }
         return false;
     }
@@ -122,18 +151,11 @@ public class UserDAO {
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erreur lors de la suppression de l'utilisateur avec l'id: " + id, e);
         }
         return false;
     }
 
-    /**
-     * Vérifie si l'email fait partie de la liste blanche.
-     * Vous pouvez adapter cette méthode pour lire une table dédiée dans MySQL.
-     *
-     * @param email l'email à vérifier
-     * @return true si l'email est autorisé, false sinon
-     */
     /**
      * Vérifie si l'email fait partie de la whitelist.
      *
@@ -152,7 +174,7 @@ public class UserDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Erreur lors de la vérification de la whitelist pour l'email: " + email, e);
         }
         return false;
     }

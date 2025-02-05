@@ -5,11 +5,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.geometry.Insets?>
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.javastore.istorejv.controller.UserManagementController" spacing="10" alignment="center">
     <ListView fx:id="userListView" prefWidth="400" prefHeight="300"/>
     <HBox spacing="10">
+        <padding>
+            <Insets left="10"/>
+        </padding>
         <Button text="Modifier Utilisateur" onAction="#handleUpdateUserAction"/>
+        <Button text="Mettre à jour le rôle" onAction="#handleUpdateUserRoleAction"/>
         <Button text="Supprimer Utilisateur" onAction="#handleDeleteUserAction"/>
     </HBox>
-    <Button text="Retour Dashboard" onAction="#handleBackAction"/>
+    <HBox spacing="10">
+        <padding>
+            <Insets bottom="10" left="10"/>
+        </padding>
+        <Button text="Ajouter utilisateur à la whitelist" onAction="#handleAddUserToWhitelistAction"/>
+        <Button text="Attribuer un magasin" onAction="#handleAssignStoreToEmployeeAction"/>
+        <Button text="Retour Dashboard" onAction="#handleBackAction"/>
+    </HBox>
 </VBox>
