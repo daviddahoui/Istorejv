@@ -1,52 +1,46 @@
 package com.istorejv.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 /**
  * Représente un article dans l'inventaire.
- * <p>
- * Un article est caractérisé par un identifiant, un nom, un prix et une quantité en stock.
- * </p>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Article {
     private int id;
     private String name;
     private double price;
     private int stockQuantity;
 
-    /**
-     * Augmente la quantité en stock.
-     *
-     * @param amount la quantité à ajouter (doit être positive)
-     * @throws IllegalArgumentException si amount est négatif
-     */
-    public void addStock(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Le montant à ajouter doit être positif.");
-        }
-        this.stockQuantity += amount;
+    public Article(int id, String name, double price, int stockQuantity) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
     }
 
-    /**
-     * Diminue la quantité en stock.
-     *
-     * @param amount la quantité à retirer (doit être positive)
-     * @return true si l'opération a réussi, false si la quantité demandée dépasse le stock disponible
-     * @throws IllegalArgumentException si amount est négatif
-     */
-    public boolean reduceStock(int amount) {
-        if (amount < 0) {
-            throw new IllegalArgumentException("Le montant à retirer doit être positif.");
-        }
-        if (this.stockQuantity - amount < 0) {
-            return false; // Stock insuffisant
-        }
-        this.stockQuantity -= amount;
-        return true;
+    // Ajoutez un constructeur sans argument si nécessaire (par exemple, pour la sérialisation)
+    public Article() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 }

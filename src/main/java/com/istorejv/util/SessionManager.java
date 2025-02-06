@@ -1,13 +1,20 @@
 package com.istorejv.util;
 
 import com.istorejv.model.User;
-import lombok.Setter;
-import lombok.Getter;
 
+/**
+ * Gère la session utilisateur.
+ */
 public class SessionManager {
-    @Getter
-    @Setter
     private static User loggedInUser;
+
+    public static User getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public static void setLoggedInUser(User user) {
+        loggedInUser = user;
+    }
 
     public static void clearSession() {
         loggedInUser = null;
