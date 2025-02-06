@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.javastore</groupId>
+    <groupId>com.istorejv</groupId>
     <artifactId>Istorejv</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Istorejv</name>
@@ -20,13 +20,6 @@
     </properties>
 
     <dependencies>
-        <!-- Lombok (génération de code à la compilation) -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
-            <scope>provided</scope>
-        </dependency>
 
         <!-- JavaFX Dependencies -->
         <dependency>

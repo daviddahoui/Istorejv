@@ -1,8 +1,5 @@
 package com.istorejv.model;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,8 +10,6 @@ import java.util.List;
  * en ajoutant ou retirant des articles de l'inventaire.
  * </p>
  */
-@Getter
-@Setter
 public class Inventory {
 
     /**
@@ -27,6 +22,24 @@ public class Inventory {
      */
     public Inventory() {
         this.articles = new ArrayList<>();
+    }
+
+    /**
+     * Retourne la liste des articles de l'inventaire.
+     *
+     * @return la liste des articles.
+     */
+    public List<Article> getArticles() {
+        return articles;
+    }
+
+    /**
+     * Définit la liste des articles de l'inventaire.
+     *
+     * @param articles la nouvelle liste d'articles.
+     */
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 
     /**

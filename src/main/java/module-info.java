@@ -7,7 +7,6 @@ module com.istorejv {
     requires org.controlsfx.controls;
     requires java.sql;
     requires jbcrypt;
-    requires static lombok;
     requires mysql.connector.j;
 
     // Ouverture des packages pour l'injection FXML
