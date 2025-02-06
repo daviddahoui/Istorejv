@@ -1,10 +1,10 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
-import com.javastore.istorejv.dao.StoreDAO;
-import com.javastore.istorejv.model.Role;
-import com.javastore.istorejv.model.Store;
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.util.SessionManager;
+import com.istorejv.dao.StoreDAO;
+import com.istorejv.model.Role;
+import com.istorejv.model.Store;
+import com.istorejv.model.User;
+import com.istorejv.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

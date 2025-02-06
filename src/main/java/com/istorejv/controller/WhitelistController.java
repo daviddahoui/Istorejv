@@ -1,6 +1,6 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
-import com.javastore.istorejv.dao.WhitelistDAO;
+import com.istorejv.dao.WhitelistDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

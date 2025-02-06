@@ -1,7 +1,7 @@
-package com.javastore.istorejv.service;
+package com.istorejv.service;
 
-import com.javastore.istorejv.dao.ArticleDAO;
-import com.javastore.istorejv.model.Article;
+import com.istorejv.dao.ArticleDAO;
+import com.istorejv.model.Article;
 
 public class InventoryService {
 

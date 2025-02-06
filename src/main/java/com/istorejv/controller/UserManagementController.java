@@ -1,14 +1,14 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
-import com.javastore.istorejv.dao.StoreDAO;
-import com.javastore.istorejv.dao.UserDAO;
-import com.javastore.istorejv.dao.WhitelistDAO;
-import com.javastore.istorejv.model.Role;
-import com.javastore.istorejv.model.Store;
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.service.UserService;
-import com.javastore.istorejv.util.PasswordUtils;
-import com.javastore.istorejv.util.SessionManager;
+import com.istorejv.dao.StoreDAO;
+import com.istorejv.dao.UserDAO;
+import com.istorejv.dao.WhitelistDAO;
+import com.istorejv.model.Role;
+import com.istorejv.model.Store;
+import com.istorejv.model.User;
+import com.istorejv.service.UserService;
+import com.istorejv.util.PasswordUtils;
+import com.istorejv.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,7 +65,7 @@ public class UserManagementController {
         pseudoDialog.setHeaderText("Modification du pseudo de l'utilisateur");
         pseudoDialog.setContentText("Nouveau pseudo :");
         Optional<String> pseudoResult = pseudoDialog.showAndWait();
-        if (!pseudoResult.isPresent() || pseudoResult.get().trim().isEmpty()) {
+        if (pseudoResult.isEmpty() || pseudoResult.get().trim().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Le pseudo ne peut pas être vide.");
             return;
         }
@@ -77,7 +77,7 @@ public class UserManagementController {
         emailDialog.setHeaderText("Modification de l'email de l'utilisateur");
         emailDialog.setContentText("Nouvel email :");
         Optional<String> emailResult = emailDialog.showAndWait();
-        if (!emailResult.isPresent() || emailResult.get().trim().isEmpty()) {
+        if (emailResult.isEmpty() || emailResult.get().trim().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erreur", "L'email ne peut pas être vide.");
             return;
         }
@@ -133,7 +133,7 @@ public class UserManagementController {
         TextInputDialog dialog = new TextInputDialog(userToUpdate.getRole().toString());
         dialog.setTitle("Mise à jour du rôle");
         dialog.setHeaderText("Modification du rôle de l'utilisateur");
-        dialog.setContentText("Nouveau rôle (ADMIN/USER) :");
+        dialog.setContentText("Nouveau rôle (ADMIN/USER/EMPLOYEE) :");
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()) {
             String newRoleStr = result.get().trim().toUpperCase();
@@ -150,7 +150,7 @@ public class UserManagementController {
                 showAlert(Alert.AlertType.INFORMATION, "Résultat", updateResult);
                 refreshUserList();
             } catch (IllegalArgumentException ex) {
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Le rôle entré est invalide. Veuillez entrer ADMIN ou USER.");
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Le rôle entré est invalide. Veuillez entrer ADMIN/USER/EMPLOYEE.");
             }
         }
     }
@@ -225,7 +225,7 @@ public class UserManagementController {
         // Saisir le rôle
         TextInputDialog roleDialog = new TextInputDialog("USER");
         roleDialog.setTitle("Ajouter utilisateur à la whitelist");
-        roleDialog.setHeaderText("Entrez le rôle de l'utilisateur (ADMIN ou USER) :");
+        roleDialog.setHeaderText("Entrez le rôle de l'utilisateur (ADMIN/USER/EMPLOYEE) :");
         Optional<String> roleResult = roleDialog.showAndWait();
         if (roleResult.isEmpty() || roleResult.get().trim().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Le rôle ne peut être vide.");
@@ -236,7 +236,7 @@ public class UserManagementController {
         try {
             role = Role.valueOf(roleStr);
         } catch (IllegalArgumentException ex) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Le rôle entré est invalide. Veuillez entrer ADMIN ou USER.");
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Le rôle entré est invalide. Veuillez entrer ADMIN/USER/EMPLOYEE.");
             return;
         }
 
@@ -289,12 +289,12 @@ public class UserManagementController {
             return;
         }
         // Vérifier si le magasin existe
-        Store store = com.javastore.istorejv.dao.StoreDAO.getStoreById(storeId);
+        Store store = StoreDAO.getStoreById(storeId);
         if (store == null) {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Magasin non trouvé pour l'ID fourni.");
             return;
         }
-        boolean success = com.javastore.istorejv.dao.StoreDAO.addEmployeeToStore(storeId, userId);
+        boolean success = StoreDAO.addEmployeeToStore(storeId, userId);
         if (success) {
             showAlert(Alert.AlertType.INFORMATION, "Succès", "L'utilisateur a été affecté au magasin : " + store.getName());
         } else {

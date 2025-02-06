@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.javastore.istorejv.controller.DashboardController"
+      fx:controller="com.istorejv.controller.DashboardController"
       spacing="10" alignment="center">
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>

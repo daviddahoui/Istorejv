@@ -1,9 +1,9 @@
-package com.javastore.istorejv.service;
+package com.istorejv.service;
 
-import com.javastore.istorejv.dao.StoreDAO;
-import com.javastore.istorejv.model.Store;
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.model.Role;
+import com.istorejv.dao.StoreDAO;
+import com.istorejv.model.Store;
+import com.istorejv.model.User;
+import com.istorejv.model.Role;
 import java.util.List;
 
 public class StoreService {

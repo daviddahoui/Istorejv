@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.javastore.istorejv.controller.InventoryManagementController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.istorejv.controller.InventoryManagementController">
     <top>
         <HBox spacing="10">
             <padding>

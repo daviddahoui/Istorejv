@@ -1,10 +1,9 @@
 package com.istorejv.dao;
 
-import com.javastore.istorejv.dao.UserDAO;
-import com.javastore.istorejv.model.Role;
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.util.DBConnection;
-import com.javastore.istorejv.util.PasswordUtils;
+import com.istorejv.model.Role;
+import com.istorejv.model.User;
+import com.istorejv.util.DBConnection;
+import com.istorejv.util.PasswordUtils;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;

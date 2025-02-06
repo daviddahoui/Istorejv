@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/ArticleDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/InventoryDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/StoreDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/UserDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/dao/WhitelistDAO.java" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/java/com/javastore/istorejv/service/StoreService.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/istorejv/dao/ArticleDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/istorejv/dao/InventoryDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/istorejv/dao/StoreDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/istorejv/dao/UserDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/istorejv/dao/WhitelistDAO.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/istorejv/service/StoreService.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/test/java/com/istorejv/dao/ArticleDAOTest.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/test/java/com/istorejv/dao/StoreDAOTest.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/test/java/com/istorejv/dao/UserDAOTest.java" dialect="GenericSQL" />

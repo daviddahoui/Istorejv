@@ -1,11 +1,11 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import com.javastore.istorejv.service.UserService;
+import com.istorejv.service.UserService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

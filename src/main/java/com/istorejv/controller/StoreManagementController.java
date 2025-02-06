@@ -1,7 +1,7 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
-import com.javastore.istorejv.dao.StoreDAO;
-import com.javastore.istorejv.model.Store;
+import com.istorejv.dao.StoreDAO;
+import com.istorejv.model.Store;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,7 +26,7 @@ public class StoreManagementController {
     @FXML
     private ListView<String> storeListView;
 
-    private ObservableList<String> storeList = FXCollections.observableArrayList();
+    private final ObservableList<String> storeList = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {

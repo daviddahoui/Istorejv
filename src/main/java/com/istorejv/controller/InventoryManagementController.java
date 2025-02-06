@@ -1,7 +1,7 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
-import com.javastore.istorejv.dao.ArticleDAO;
-import com.javastore.istorejv.model.Article;
+import com.istorejv.dao.ArticleDAO;
+import com.istorejv.model.Article;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,11 +31,11 @@ public class InventoryManagementController {
     @FXML
     private ListView<String> articleListView;
 
-    private ObservableList<String> articleList = FXCollections.observableArrayList();
+    private final ObservableList<String> articleList = FXCollections.observableArrayList();
 
     // Pour cet exemple, nous utilisons un identifiant d'inventaire fixe.
     // Dans une application complète, cette valeur serait déterminée dynamiquement.
-    private int inventoryId = 1;
+    private final int inventoryId = 1;
 
     @FXML
     public void initialize() {

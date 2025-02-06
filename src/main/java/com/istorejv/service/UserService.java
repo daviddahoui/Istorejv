@@ -1,9 +1,9 @@
-package com.javastore.istorejv.service;
+package com.istorejv.service;
 
-import com.javastore.istorejv.dao.UserDAO;
-import com.javastore.istorejv.model.Role;
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.util.PasswordUtils;
+import com.istorejv.dao.UserDAO;
+import com.istorejv.model.Role;
+import com.istorejv.model.User;
+import com.istorejv.util.PasswordUtils;
 
 public class UserService {
 
@@ -66,7 +66,7 @@ public class UserService {
         }
         // Hachage du mot de passe et création de l'utilisateur avec rôle par défaut USER
         String hashedPassword = PasswordUtils.hashPassword(password);
-        User newUser = new User(0, email, pseudo, hashedPassword, com.javastore.istorejv.model.Role.USER);
+        User newUser = new User(0, email, pseudo, hashedPassword, Role.USER);
         boolean success = UserDAO.createUser(newUser);
         return success ? "OK" : "Erreur lors de la création du compte.";
     }

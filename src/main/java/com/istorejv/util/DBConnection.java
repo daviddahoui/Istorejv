@@ -1,4 +1,4 @@
-package com.javastore.istorejv.util;
+package com.istorejv.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

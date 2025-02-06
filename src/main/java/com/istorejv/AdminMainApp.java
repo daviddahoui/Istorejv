@@ -1,8 +1,8 @@
-package com.javastore.istorejv;
+package com.istorejv;
 
-import com.javastore.istorejv.model.Role;
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.util.SessionManager;
+import com.istorejv.model.Role;
+import com.istorejv.model.User;
+import com.istorejv.util.SessionManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

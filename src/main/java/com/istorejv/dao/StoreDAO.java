@@ -1,7 +1,9 @@
-package com.javastore.istorejv.dao;
+package com.istorejv.dao;
 
-import com.javastore.istorejv.model.Store;
-import com.javastore.istorejv.util.DBConnection;
+import com.istorejv.model.Role;
+import com.istorejv.model.User;
+import com.istorejv.model.Store;
+import com.istorejv.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -81,8 +83,8 @@ public class StoreDAO {
      * @param storeId L'identifiant du magasin.
      * @return une liste d'utilisateurs.
      */
-    public static List<com.javastore.istorejv.model.User> getEmployeesForStore(int storeId) {
-        List<com.javastore.istorejv.model.User> employees = new ArrayList<>();
+    public static List<User> getEmployeesForStore(int storeId) {
+        List<User> employees = new ArrayList<>();
         String sql = "SELECT u.id, u.email, u.pseudo, u.password, u.role " +
                 "FROM users u JOIN store_employees se ON u.id = se.user_id " +
                 "WHERE se.store_id = ?";
@@ -97,8 +99,8 @@ public class StoreDAO {
                     String passwordHash = rs.getString("password");
                     String roleStr = rs.getString("role");
                     // Création de l'utilisateur en utilisant le rôle converti en majuscules
-                    com.javastore.istorejv.model.User user = new com.javastore.istorejv.model.User(
-                            id, email, pseudo, passwordHash, com.javastore.istorejv.model.Role.valueOf(roleStr.toUpperCase())
+                    User user = new User(
+                            id, email, pseudo, passwordHash, Role.valueOf(roleStr.toUpperCase())
                     );
                     employees.add(user);
                 }

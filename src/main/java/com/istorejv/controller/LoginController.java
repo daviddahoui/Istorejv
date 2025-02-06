@@ -1,8 +1,8 @@
-package com.javastore.istorejv.controller;
+package com.istorejv.controller;
 
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.service.UserService;
-import com.javastore.istorejv.util.SessionManager;
+import com.istorejv.model.User;
+import com.istorejv.service.UserService;
+import com.istorejv.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

@@ -1,8 +1,8 @@
-package com.javastore.istorejv.dao;
+package com.istorejv.dao;
 
-import com.javastore.istorejv.model.User;
-import com.javastore.istorejv.model.Role;
-import com.javastore.istorejv.util.DBConnection;
+import com.istorejv.model.User;
+import com.istorejv.model.Role;
+import com.istorejv.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

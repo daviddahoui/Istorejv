@@ -1,6 +1,6 @@
-package com.javastore.istorejv.util;
+package com.istorejv.util;
 
-import com.javastore.istorejv.model.User;
+import com.istorejv.model.User;
 import lombok.Setter;
 import lombok.Getter;
 

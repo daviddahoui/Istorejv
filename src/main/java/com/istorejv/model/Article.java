@@ -1,4 +1,4 @@
-package com.javastore.istorejv.model;
+package com.istorejv.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * Représente un article dans l'inventaire.
- * Contient l'identifiant, le nom, le prix et la quantité en stock.
+ * <p>
+ * Un article est caractérisé par un identifiant, un nom, un prix et une quantité en stock.
+ * </p>
  */
 @Data
 @NoArgsConstructor

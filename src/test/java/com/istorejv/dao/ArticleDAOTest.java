@@ -1,8 +1,7 @@
 package com.istorejv.dao;
 
-import com.javastore.istorejv.dao.ArticleDAO;
-import com.javastore.istorejv.model.Article;
-import com.javastore.istorejv.util.DBConnection;
+import com.istorejv.model.Article;
+import com.istorejv.util.DBConnection;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
