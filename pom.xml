@@ -8,107 +8,80 @@
 
     <groupId>com.istorejv</groupId>
     <artifactId>Istorejv</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.0</version>
     <name>Istorejv</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <junit.version>5.10.2</junit.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <javafx.version>21.0.6</javafx.version>
+        <junit.version>5.11.4</junit.version>
         <app.name>Istorejv</app.name>
     </properties>
 
     <dependencies>
-
-        <!-- JavaFX Dependencies -->
+        <!-- Interface graphique -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>19.0.2</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>19.0.2</version>
+            <version>${javafx.version}</version>
         </dependency>
 
-        <!-- ControlsFX pour des contrôles UI avancés -->
+        <!-- Base de données -->
         <dependency>
-            <groupId>org.controlsfx</groupId>
-            <artifactId>controlsfx</artifactId>
-            <version>11.2.1</version>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.1.0</version>
         </dependency>
 
-        <!-- JUnit 5 pour les tests -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- MySQL Connector/J -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
-
-        <!-- jBCrypt pour le hachage de mot de passe -->
+        <!-- Hachage des mots de passe -->
         <dependency>
             <groupId>org.mindrot</groupId>
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
 
-        <!-- Logback Classic pour la journalisation -->
+        <!-- Tests -->
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.4.14</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Maven Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                </configuration>
             </plugin>
 
-            <!-- JavaFX Maven Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.5.2</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <id>default-cli</id>
-                        <configuration>
-                            <!-- Spécifiez ici la classe principale de votre application -->
-                            <mainClass>com.istorejv.MainApp</mainClass>
-                            <launcher>${app.name}</launcher>
-                            <jlinkZipName>${app.name}</jlinkZipName>
-                            <jlinkImageName>${app.name}</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <mainClass>com.istorejv/com.istorejv.MainApp</mainClass>
+                    <launcher>${app.name}</launcher>
+                    <jlinkZipName>${app.name}</jlinkZipName>
+                    <jlinkImageName>${app.name}</jlinkImageName>
+                    <noManPages>true</noManPages>
+                    <stripDebug>true</stripDebug>
+                    <noHeaderFiles>true</noHeaderFiles>
+                </configuration>
             </plugin>
         </plugins>
     </build>

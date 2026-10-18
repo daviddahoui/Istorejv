@@ -1,0 +1,23 @@
+# Base MySQL de développement : `docker compose up -d`
+# Les scripts de database/ sont exécutés au premier démarrage (volume vide).
+services:
+  db:
+    image: mysql:8.4
+    container_name: istore-db
+    environment:
+      MYSQL_DATABASE: istoredb
+      MYSQL_USER: istore
+      MYSQL_PASSWORD: istore
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d:ro
+      - istore-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uistore", "-pistore"]
+      interval: 5s
+      retries: 20
+
+volumes:
+  istore-data:

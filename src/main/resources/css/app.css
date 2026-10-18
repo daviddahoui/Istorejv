@@ -1,0 +1,87 @@
+/* Thème iStore : fond clair, cartes blanches, une couleur d'action. */
+.root {
+    -fx-font-family: "System";
+    -fx-font-size: 13px;
+    -fx-background-color: #f4f5f7;
+    -accent: #1f6f5c;
+    -accent-dark: #17574a;
+    -danger: #b42318;
+    -text: #1d2433;
+    -muted: #667085;
+    -border: #dfe3e8;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-border-color: -border;
+    -fx-border-radius: 10;
+    -fx-padding: 24;
+    -fx-effect: dropshadow(gaussian, rgba(16, 24, 40, 0.08), 12, 0, 0, 2);
+}
+
+.brand { -fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: -accent; }
+.title { -fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: -text; }
+.subtitle, .muted { -fx-text-fill: -muted; }
+.field-label { -fx-text-fill: -text; -fx-font-weight: bold; }
+
+.top-bar {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent -border transparent;
+    -fx-padding: 14 24;
+}
+
+.text-field, .password-field, .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: -border;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 7 10;
+}
+.text-field:focused, .password-field:focused, .combo-box:focused { -fx-border-color: -accent; }
+/* Sélecteur verrouillé (employé) : reste lisible. */
+.combo-box:disabled { -fx-opacity: 1; -fx-background-color: #f4f5f7; }
+.combo-box:disabled > .list-cell, .combo-box:disabled > .arrow-button { -fx-opacity: 1; -fx-text-fill: -text; }
+
+.button {
+    -fx-background-color: white;
+    -fx-border-color: -border;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 14;
+    -fx-text-fill: -text;
+    -fx-cursor: hand;
+}
+.button:hover { -fx-background-color: #eef1f4; }
+.button:disabled { -fx-opacity: 0.45; }
+
+.button-primary { -fx-background-color: -accent; -fx-border-color: -accent; -fx-text-fill: white; -fx-font-weight: bold; }
+.button-primary:hover { -fx-background-color: -accent-dark; }
+.button-danger { -fx-text-fill: -danger; -fx-border-color: #f2c4c0; }
+.button-danger:hover { -fx-background-color: #fdf0ef; }
+.button-link { -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: -accent; -fx-padding: 4 0; }
+.button-link:hover { -fx-underline: true; -fx-background-color: transparent; }
+
+.nav-tile {
+    -fx-background-color: white;
+    -fx-border-color: -border;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 18;
+    -fx-pref-width: 200;
+    -fx-alignment: center-left;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.nav-tile:hover { -fx-border-color: -accent; -fx-background-color: white; }
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: -border;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 4;
+}
+.list-cell { -fx-padding: 8 10; -fx-background-color: white; -fx-text-fill: -text; }
+.list-cell:odd { -fx-background-color: #fafbfc; }
+.list-cell:filled:selected { -fx-background-color: #e3f1ed; -fx-text-fill: -text; }

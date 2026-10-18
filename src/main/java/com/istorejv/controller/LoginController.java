@@ -2,19 +2,15 @@ package com.istorejv.controller;
 
 import com.istorejv.model.User;
 import com.istorejv.service.UserService;
+import com.istorejv.util.Navigation;
 import com.istorejv.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
-import java.util.Objects;
 
 public class LoginController {
 
@@ -51,13 +47,7 @@ public class LoginController {
             alert.setHeaderText(null);
             alert.setContentText("Bienvenue " + user.getPseudo() + " !");
             alert.showAndWait();
-            try {
-                Parent dashboardRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/DashboardView.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(dashboardRoot));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Navigation.goTo((Node) event.getSource(), "/view/DashboardView.fxml");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur de connexion");
@@ -72,12 +62,6 @@ public class LoginController {
      */
     @FXML
     private void handleCreateAccountAction(ActionEvent event) {
-        try {
-            Parent createAccountRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/CreateAccountView.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(createAccountRoot));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo((Node) event.getSource(), "/view/CreateAccountView.fxml");
     }
 }

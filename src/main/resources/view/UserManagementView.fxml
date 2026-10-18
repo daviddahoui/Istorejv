@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.geometry.Insets?>
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.istorejv.controller.UserManagementController" spacing="10" alignment="center">
-    <ListView fx:id="userListView" prefWidth="400" prefHeight="300"/>
-    <HBox spacing="10">
-        <padding>
-            <Insets left="10"/>
-        </padding>
-        <Button text="Modifier Utilisateur" onAction="#handleUpdateUserAction"/>
-        <Button text="Mettre à jour le rôle" onAction="#handleUpdateUserRoleAction"/>
-        <Button text="Supprimer Utilisateur" onAction="#handleDeleteUserAction"/>
-    </HBox>
-    <HBox spacing="10">
-        <padding>
-            <Insets bottom="10" left="10"/>
-        </padding>
-        <Button text="Ajouter utilisateur à la whitelist" onAction="#handleAddUserToWhitelistAction"/>
-        <Button text="Attribuer un magasin" onAction="#handleAssignStoreToEmployeeAction"/>
-        <Button text="Retour Dashboard" onAction="#handleBackAction"/>
-    </HBox>
-</VBox>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.istorejv.controller.UserManagementController"
+            prefWidth="960" prefHeight="640">
+    <top>
+        <HBox styleClass="top-bar" spacing="16" alignment="CENTER_LEFT">
+            <Label text="Utilisateurs" styleClass="title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Retour au tableau de bord" onAction="#handleBackAction"/>
+        </HBox>
+    </top>
+    <center>
+        <VBox spacing="12">
+            <padding><Insets top="20" right="24" bottom="24" left="24"/></padding>
+            <ListView fx:id="userListView" VBox.vgrow="ALWAYS"/>
+            <FlowPane hgap="10" vgap="10">
+                <Button text="Nouvel utilisateur" onAction="#handleAddUserToWhitelistAction" styleClass="button-primary"/>
+                <Button text="Modifier" onAction="#handleUpdateUserAction"/>
+                <Button text="Changer le rôle" onAction="#handleUpdateUserRoleAction"/>
+                <Button text="Attribuer un magasin" onAction="#handleAssignStoreToEmployeeAction"/>
+                <Button text="Liste blanche" onAction="#handleWhitelistAction"/>
+                <Button text="Supprimer" onAction="#handleDeleteUserAction" styleClass="button-danger"/>
+            </FlowPane>
+        </VBox>
+    </center>
+</BorderPane>

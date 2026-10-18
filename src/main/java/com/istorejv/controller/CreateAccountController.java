@@ -1,17 +1,13 @@
 package com.istorejv.controller;
 
+import com.istorejv.util.Navigation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import com.istorejv.service.UserService;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.util.Objects;
 
 public class CreateAccountController {
 
@@ -46,13 +42,7 @@ public class CreateAccountController {
             alert.setContentText("Compte créé avec succès !");
             alert.showAndWait();
             // Redirection vers la vue de connexion
-            try {
-                Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LoginView.fxml")));
-                Stage stage = (Stage) emailField.getScene().getWindow();
-                stage.setScene(new Scene(loginRoot));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Navigation.goTo(emailField, "/view/LoginView.fxml");
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur lors de la création du compte");
@@ -67,12 +57,6 @@ public class CreateAccountController {
      */
     @FXML
     private void handleCancelAction(ActionEvent event) {
-        try {
-            Parent loginRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LoginView.fxml")));
-            Stage stage = (Stage) emailField.getScene().getWindow();
-            stage.setScene(new Scene(loginRoot));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo(emailField, "/view/LoginView.fxml");
     }
 }

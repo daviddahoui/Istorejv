@@ -4,24 +4,25 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Fournit les connexions à la base MySQL.
+ * <p>
+ * Les paramètres se règlent avec les variables d'environnement ISTORE_DB_URL, ISTORE_DB_USER et
+ * ISTORE_DB_PASSWORD. Sans elles, les valeurs par défaut correspondent au docker-compose.yml du projet.
+ * </p>
+ */
 public class DBConnection {
-    // Mise à jour de l'URL pour autoriser la récupération de la clé publique.
-    private static final String URL = "jdbc:mysql://localhost:3306/istoredb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String URL = env("ISTORE_DB_URL",
+            "jdbc:mysql://localhost:3306/istoredb?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC");
+    private static final String USER = env("ISTORE_DB_USER", "istore");
+    private static final String PASSWORD = env("ISTORE_DB_PASSWORD", "istore");
+
+    private static String env(String name, String fallback) {
+        String value = System.getenv(name);
+        return value == null || value.isBlank() ? fallback : value;
+    }
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
-    }
-    public static void main(String[] args) {
-        try (Connection conn = DBConnection.getConnection()) {
-            if (conn != null && !conn.isClosed()) {
-                System.out.println("Connexion à la base de données réussie !");
-            } else {
-                System.out.println("La connexion à la base de données a échoué !");
-            }
-        } catch (SQLException e) {
-            System.err.println("Erreur lors de la connexion : " + e.getMessage());
-        }
     }
 }

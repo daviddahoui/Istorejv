@@ -4,7 +4,6 @@ module com.istorejv {
     requires javafx.fxml;
 
     // Autres dépendances
-    requires org.controlsfx.controls;
     requires java.sql;
     requires jbcrypt;
     requires mysql.connector.j;

@@ -8,20 +8,19 @@ import com.istorejv.model.Store;
 import com.istorejv.model.User;
 import com.istorejv.service.UserService;
 import com.istorejv.util.PasswordUtils;
+import com.istorejv.util.Navigation;
 import com.istorejv.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class UserManagementController {
@@ -89,11 +88,7 @@ public class UserManagementController {
         }
 
         // Saisir le nouveau mot de passe (laisser vide pour conserver l'ancien)
-        TextInputDialog passwordDialog = new TextInputDialog();
-        passwordDialog.setTitle("Mise à jour du compte");
-        passwordDialog.setHeaderText("Modification du mot de passe de l'utilisateur");
-        passwordDialog.setContentText("Nouveau mot de passe (laisser vide pour conserver l'ancien) :");
-        Optional<String> passwordResult = passwordDialog.showAndWait();
+        Optional<String> passwordResult = askPassword("Mise à jour du compte", "Nouveau mot de passe (laisser vide pour conserver l'ancien) :");
         String newHashedPassword;
         if (passwordResult.isPresent() && !passwordResult.get().trim().isEmpty()) {
             String newPassword = passwordResult.get().trim();
@@ -208,10 +203,7 @@ public class UserManagementController {
         String pseudo = pseudoResult.get().trim();
 
         // Saisir le mot de passe
-        TextInputDialog passwordDialog = new TextInputDialog();
-        passwordDialog.setTitle("Ajouter utilisateur à la whitelist");
-        passwordDialog.setHeaderText("Entrez le mot de passe de l'utilisateur :");
-        Optional<String> passwordResult = passwordDialog.showAndWait();
+        Optional<String> passwordResult = askPassword("Ajouter utilisateur à la whitelist", "Entrez le mot de passe de l'utilisateur :");
         if (passwordResult.isEmpty() || passwordResult.get().trim().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Le mot de passe ne peut être vide.");
             return;
@@ -308,13 +300,7 @@ public class UserManagementController {
      */
     @FXML
     private void handleBackAction(ActionEvent event) {
-        try {
-            Parent dashboardRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/DashboardView.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(dashboardRoot));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo((Node) event.getSource(), "/view/DashboardView.fxml");
     }
 
     /**
@@ -339,5 +325,25 @@ public class UserManagementController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    /**
+     * Demande un mot de passe dans un champ masqué (un TextInputDialog l'afficherait en clair).
+     */
+    private Optional<String> askPassword(String title, String label) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.setHeaderText(label);
+        PasswordField field = new PasswordField();
+        dialog.getDialogPane().setContent(field);
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        dialog.setOnShown(e -> field.requestFocus());
+        dialog.setResultConverter(button -> button == ButtonType.OK ? field.getText() : null);
+        return dialog.showAndWait();
+    }
+
+    @FXML
+    private void handleWhitelistAction(ActionEvent event) {
+        Navigation.goTo((Node) event.getSource(), "/view/WhitelistView.fxml");
     }
 }

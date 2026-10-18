@@ -1,8 +1,7 @@
 package com.istorejv;
 
+import com.istorejv.util.Navigation;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,12 +11,12 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Chargement du fichier FXML pour la vue de connexion
-        Parent root = FXMLLoader.load(Objects.requireNonNull(
-                getClass().getResource("/view/LoginView.fxml"),
-                "Le fichier FXML /view/LoginView.fxml est introuvable. Vérifiez le chemin et la présence du fichier dans src/main/resources."));
-        primaryStage.setTitle("iStore - Connexion");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(Navigation.load("/view/LoginView.fxml"));
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/app.css")).toExternalForm());
+        primaryStage.setTitle("iStore");
+        primaryStage.setMinWidth(760);
+        primaryStage.setMinHeight(520);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

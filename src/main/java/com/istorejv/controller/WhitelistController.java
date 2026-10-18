@@ -1,5 +1,6 @@
 package com.istorejv.controller;
 
+import com.istorejv.util.Navigation;
 import com.istorejv.dao.WhitelistDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,12 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.fxml.FXMLLoader;
-import javafx.stage.Stage;
 import java.util.List;
-import java.util.Objects;
 
 public class WhitelistController {
 
@@ -58,14 +54,8 @@ public class WhitelistController {
     }
 
     @FXML
-    private void handleBackToDashboard(ActionEvent event) {
-        try {
-            Parent dashboardRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/DashboardView.fxml")));
-            Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(dashboardRoot));
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+    private void handleBackToUsers(ActionEvent event) {
+        Navigation.goTo((Node) event.getSource(), "/view/UserManagementView.fxml");
     }
 
     private void refreshWhitelist() {

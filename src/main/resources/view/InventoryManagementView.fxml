@@ -2,42 +2,40 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.istorejv.controller.InventoryManagementController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.istorejv.controller.InventoryManagementController"
+            prefWidth="960" prefHeight="640">
     <top>
-        <HBox spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <TextField fx:id="articleNameField" promptText="Nom de l'article" />
-            <TextField fx:id="articlePriceField" promptText="Prix" />
-            <TextField fx:id="articleStockField" promptText="Quantité en stock" />
-            <Button text="Ajouter article" onAction="#handleAddArticleAction" />
+        <HBox styleClass="top-bar" spacing="16" alignment="CENTER_LEFT">
+            <Label text="Inventaire" styleClass="title"/>
+            <ComboBox fx:id="storeSelector" promptText="Choisir un magasin" prefWidth="220"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Retour au tableau de bord" onAction="#handleBackToDashboardAction"/>
         </HBox>
     </top>
     <center>
-        <VBox spacing="10">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <ListView fx:id="articleListView" prefHeight="200" prefWidth="400" />
+        <VBox spacing="12">
+            <padding><Insets top="20" right="24" bottom="24" left="24"/></padding>
+            <Label fx:id="scopeLabel" styleClass="muted" wrapText="true"/>
+            <ListView fx:id="articleListView" VBox.vgrow="ALWAYS"/>
+            <HBox fx:id="articleForm" spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="articleNameField" promptText="Nom de l'article" HBox.hgrow="ALWAYS"/>
+                <TextField fx:id="articlePriceField" promptText="Prix (€)" prefWidth="110"/>
+                <TextField fx:id="articleStockField" promptText="Quantité" prefWidth="110"/>
+                <Button fx:id="addButton" text="Ajouter" onAction="#handleAddArticleAction" styleClass="button-primary"/>
+            </HBox>
             <HBox spacing="10">
-                <Button text="Supprimer article sélectionné" onAction="#handleDeleteArticleAction" />
-                <Button text="Mettre à jour article sélectionné" onAction="#handleUpdateArticleAction" />
+                <Button fx:id="updateButton" text="Mettre à jour le stock de la sélection" onAction="#handleUpdateArticleAction"/>
+                <Button fx:id="deleteButton" text="Supprimer la sélection" onAction="#handleDeleteArticleAction" styleClass="button-danger"/>
             </HBox>
         </VBox>
     </center>
-    <bottom>
-        <VBox alignment="center">
-            <padding>
-                <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <Button text="Retour Dashboard" onAction="#handleBackToDashboardAction"/>
-        </VBox>
-    </bottom>
 </BorderPane>

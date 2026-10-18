@@ -15,13 +15,13 @@ import java.util.List;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ArticleDAOTest {
 
+    private int testStoreId;
     private int testInventoryId;
 
     @BeforeAll
     public void setupInventory() throws SQLException {
         // Créer un magasin de test pour obtenir un inventaire valide.
         String createStoreSql = "INSERT INTO stores(name) VALUES(?)";
-        int testStoreId;
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(createStoreSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, "Test Store");
@@ -57,10 +57,10 @@ public class ArticleDAOTest {
     @AfterAll
     public void cleanupInventory() throws SQLException {
         // Supprimer l'inventaire de test.
-        String sql = "DELETE FROM inventories WHERE id = ?";
+        String sql = "DELETE FROM stores WHERE id = ?";
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, testInventoryId);
+            stmt.setInt(1, testStoreId); // supprime aussi l'inventaire (ON DELETE CASCADE)
             stmt.executeUpdate();
         }
     }

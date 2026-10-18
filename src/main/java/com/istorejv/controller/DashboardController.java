@@ -4,20 +4,16 @@ import com.istorejv.dao.StoreDAO;
 import com.istorejv.model.Role;
 import com.istorejv.model.Store;
 import com.istorejv.model.User;
+import com.istorejv.util.Navigation;
 import com.istorejv.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Objects;
 
 public class DashboardController {
 
@@ -93,46 +89,22 @@ public class DashboardController {
 
     @FXML
     private void handleStoreManagementAction(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/StoreManagementView.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo((Node) event.getSource(), "/view/StoreManagementView.fxml");
     }
 
     @FXML
     private void handleInventoryManagementAction(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/InventoryManagementView.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo((Node) event.getSource(), "/view/InventoryManagementView.fxml");
     }
 
     @FXML
     private void handleUserManagementAction(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/UserManagementView.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo((Node) event.getSource(), "/view/UserManagementView.fxml");
     }
 
     @FXML
     private void handleLogoutAction(ActionEvent event) {
         SessionManager.clearSession();
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/LoginView.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Navigation.goTo((Node) event.getSource(), "/view/LoginView.fxml");
     }
 }
